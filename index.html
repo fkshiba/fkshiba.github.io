@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" rel="stylesheet" />
     <style>
-        /* Basic styling for the slide deck */
+        /* Estilo básico para a apresentação de slides */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
@@ -22,7 +22,7 @@
             margin: 0;
             overflow: hidden;
         }
-        /* Container for the slides */
+        /* Contêiner para os slides */
         #presentation-container {
             width: 100%;
             height: 100%;
@@ -32,7 +32,7 @@
             align-items: center;
             position: relative;
         }
-        /* Individual slide styling */
+        /* Estilo de cada slide */
         .slide {
             display: none;
             width: 90%;
@@ -52,7 +52,7 @@
         .slide.active {
             display: flex;
         }
-        /* Navigation controls styling */
+        /* Estilo dos controles de navegação */
         #navigation-controls {
             position: absolute;
             bottom: 5%;
@@ -79,21 +79,21 @@
             background-color: #a5b4fc;
             cursor: not-allowed;
         }
-        /* Slide counter styling */
+        /* Estilo do contador de slides */
         #slide-counter {
             color: #4b5563;
             font-weight: 500;
             min-width: 60px;
             text-align: center;
         }
-        /* Custom slide content styling */
+        /* Estilo do conteúdo personalizado dos slides */
         h1 { font-size: 3rem; font-weight: 700; line-height: 1.1; color: #111827;}
         h2 { font-size: 2.25rem; font-weight: 700; text-align: center; width: 100%; }
         h3 { font-size: 1.5rem; font-weight: 500; }
         p, li { font-size: 1.125rem; line-height: 1.75; color: #374151;}
         ul { list-style-position: inside; }
 
-        /* Code block styling */
+        /* Estilo do bloco de código */
         pre[class*="language-"] {
             padding: 1em;
             margin: .5em 0;
@@ -109,11 +109,6 @@
         <!-- Slide 1: Título -->
         <div class="slide active" id="slide-1">
             <div class="text-center">
-                <div class="flex justify-center items-center gap-8 mb-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png" alt="Kotlin Logo" class="h-24">
-                    <span class="text-5xl font-thin">+</span>
-                    <img src="https://raw.githubusercontent.com/jetpack-compose/jetpack-compose-logo/master/compose-logo-vector.svg" alt="Jetpack Compose Logo" class="h-24">
-                </div>
                 <h1 class="mb-4">Modernizando RIBs</h1>
                 <h2 class="text-2xl font-medium text-indigo-600">Uma Nova Era para a Arquitetura Android</h2>
             </div>
@@ -149,18 +144,15 @@
              <div class="text-center w-full">
                 <h2 class="mb-12">A Solução: Três Pilares da Modernização</h2>
                 <div class="flex flex-col md:flex-row justify-around items-center gap-8">
-                    <div class="p-8 bg-indigo-100 rounded-lg w-full md:w-1/4 text-center transform hover:scale-105 transition-transform">
-                        <img src="https://raw.githubusercontent.com/Kotlin/kotlin-logo/master/logo/positive/logo-symbol-only.svg" class="h-20 mx-auto mb-4" alt="Kotlin Symbol">
+                    <div class="p-8 bg-indigo-100 rounded-lg w-full md:w-1/3 text-center transform hover:scale-105 transition-transform">
                         <h3 class="text-indigo-800 mb-2">Kotlin Coroutines</h3>
                         <p class="text-sm text-indigo-700">Async simples e leve.</p>
                     </div>
-                    <div class="p-8 bg-green-100 rounded-lg w-full md:w-1/4 text-center transform hover:scale-105 transition-transform">
-                         <img src="https://raw.githubusercontent.com/jetpack-compose/jetpack-compose-logo/master/compose-logo-symbol.svg" class="h-20 mx-auto mb-4" alt="Compose Symbol">
+                    <div class="p-8 bg-green-100 rounded-lg w-full md:w-1/3 text-center transform hover:scale-105 transition-transform">
                         <h3 class="text-green-800 mb-2">Jetpack Compose</h3>
                         <p class="text-sm text-green-700">UI declarativa em Kotlin.</p>
                     </div>
-                    <div class="p-8 bg-sky-100 rounded-lg w-full md:w-1/4 text-center transform hover:scale-105 transition-transform">
-                         <img src="https://img.icons8.com/plasticine/100/000000/flow-chart.png" class="h-20 mx-auto mb-4" alt="MVI Flow Icon">
+                    <div class="p-8 bg-sky-100 rounded-lg w-full md:w-1/3 text-center transform hover:scale-105 transition-transform">
                         <h3 class="text-sky-800 mb-2">Padrão MVI</h3>
                         <p class="text-sm text-sky-700">Fluxo de dados previsível.</p>
                     </div>
@@ -245,17 +237,31 @@ fun MyScreen(viewModel: MyViewModel) {
         
         <!-- Slide 6: A Evolução -> "Presenterless" -->
         <div class="slide" id="slide-6">
-            <div class="w-full">
+            <div class="w-full text-center">
                 <h2 class="mb-8">A Evolução: Interactors "Presenterless"</h2>
-                <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-                    <div class="p-4 bg-gray-100 rounded-lg text-center">
-                        <h3 class="text-gray-700">Antes</h3>
-                        <img src="https://placehold.co/400x300/e0e7ff/4338ca?text=Interactor+%E2%86%92+Presenter+%E2%86%92+View" alt="Old Architecture" class="rounded-md mt-2">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 w-full">
+                    <!-- Diagrama "Antes" -->
+                    <div class="p-6 bg-gray-100 rounded-lg text-center border w-full md:w-2/5">
+                        <h3 class="text-gray-700 mb-4">Antes</h3>
+                        <div class="flex items-center justify-center space-x-2 text-lg font-mono">
+                            <span class="p-2 bg-red-200 rounded">Interactor</span>
+                            <span class="text-red-500 font-bold">→</span>
+                            <span class="p-2 bg-red-200 rounded">Presenter</span>
+                            <span class="text-red-500 font-bold">→</span>
+                            <span class="p-2 bg-red-200 rounded">View</span>
+                        </div>
                     </div>
-                    <div class="text-4xl font-bold text-indigo-500 mx-8 hidden md:block">→</div>
-                     <div class="p-4 bg-gray-100 rounded-lg text-center">
-                        <h3 class="text-gray-700">Depois (MVI)</h3>
-                        <img src="https://placehold.co/400x300/e0f2fe/0369a1?text=UI+%E2%86%94+Interactor+%E2%86%94+State" alt="New MVI Architecture" class="rounded-md mt-2">
+                    <div class="text-4xl font-bold text-indigo-500 mx-4 hidden md:block">→</div>
+                     <!-- Diagrama "Depois" -->
+                     <div class="p-6 bg-gray-100 rounded-lg text-center border w-full md:w-2/5">
+                        <h3 class="text-gray-700 mb-4">Depois (MVI)</h3>
+                         <div class="flex items-center justify-center space-x-2 text-lg font-mono">
+                            <span class="p-2 bg-green-200 rounded">UI</span>
+                            <span class="text-green-500 font-bold">↔</span>
+                            <span class="p-2 bg-green-200 rounded">Interactor</span>
+                            <span class="text-green-500 font-bold">↔</span>
+                            <span class="p-2 bg-green-200 rounded">State</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,9 +303,17 @@ fun MyScreen(viewModel: MyViewModel) {
 
         <!-- Slide 8: O Fluxo MVI Moderno -->
         <div class="slide" id="slide-8">
-            <div class="w-full">
+            <div class="w-full text-center">
                  <h2 class="mb-8 text-center">O Fluxo de Dados MVI</h2>
-                 <img src="https://placehold.co/900x450/f3f4f6/1f2937?text=View%20(UI)%0A%E2%86%93%20Intent%20(Evento)%0AInteractor%20(L%C3%B3gica)%0A%E2%86%93%20State%20(Estado)%0AView%20(UI)" alt="MVI Data Flow Diagram" class="rounded-lg mx-auto">
+                 <div class="p-8 bg-gray-50 rounded-xl inline-block">
+                     <div class="space-y-4 font-mono text-xl">
+                        <div class="p-3 bg-sky-200 rounded-lg">View (UI)</div>
+                        <div class="text-center text-2xl text-sky-500">↓ Intent (Evento)</div>
+                        <div class="p-3 bg-indigo-200 rounded-lg">Interactor (Lógica)</div>
+                        <div class="text-center text-2xl text-indigo-500">↓ State (Estado)</div>
+                        <div class="p-3 bg-sky-200 rounded-lg">View (UI)</div>
+                     </div>
+                 </div>
             </div>
         </div>
 
@@ -307,13 +321,13 @@ fun MyScreen(viewModel: MyViewModel) {
         <div class="slide" id="slide-9">
              <div class="w-full">
                 <h2 class="mb-10 text-center">Benefícios da Nova Arquitetura</h2>
-                <ul class="space-y-6 max-w-4xl mx-auto text-xl grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                    <li class="flex items-center"><span class="text-green-500 mr-3 text-3xl">✅</span> <strong>Velocidade:</strong> Desenvolvimento de UI mais rápido.</li>
-                    <li class="flex items-center"><span class="text-green-500 mr-3 text-3xl">✅</span> <strong>Performance:</strong> Menos consumo de memória.</li>
-                    <li class="flex items-center"><span class="text-green-500 mr-3 text-3xl">✅</span> <strong>Confiabilidade:</strong> Menos bugs de estado.</li>
-                    <li class="flex items-center"><span class="text-green-500 mr-3 text-3xl">✅</span> <strong>Testes:</strong> Lógica de negócio isolada e fácil de testar.</li>
-                    <li class="flex items-center"><span class="text-green-500 mr-3 text-3xl">✅</span> <strong>Coesão:</strong> UI e lógica na mesma linguagem (Kotlin).</li>
-                    <li class="flex items-center"><span class="text-green-500 mr-3 text-3xl">✅</span> <strong>À Prova de Futuro:</strong> Alinhado com as práticas modernas do Android.</li>
+                <ul class="space-y-6 max-w-lg mx-auto text-xl">
+                    <li class="flex items-center"><span class="text-green-500 mr-4 text-3xl">✅</span> <strong>Velocidade:</strong> Desenvolvimento de UI mais rápido.</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-4 text-3xl">✅</span> <strong>Performance:</strong> Menos consumo de memória.</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-4 text-3xl">✅</span> <strong>Confiabilidade:</strong> Menos bugs de estado.</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-4 text-3xl">✅</span> <strong>Testes:</strong> Lógica de negócio isolada e fácil de testar.</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-4 text-3xl">✅</span> <strong>Coesão:</strong> UI e lógica na mesma linguagem (Kotlin).</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-4 text-3xl">✅</span> <strong>À Prova de Futuro:</strong> Alinhado com as práticas modernas do Android.</li>
                 </ul>
             </div>
         </div>
@@ -323,10 +337,9 @@ fun MyScreen(viewModel: MyViewModel) {
              <div class="w-full">
                 <h2 class="mb-10">Rollout e Migração</h2>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-12">
-                     <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/128/000000/external-roadmap-achievements-flaticons-lineal-color-flat-icons-2.png" alt="Roadmap Icon" class="h-32">
                      <div class="text-left">
-                         <h3 class="text-2xl mb-4 text-indigo-600">Uma Abordagem Evolutiva</h3>
-                         <ul class="space-y-3 list-disc text-lg">
+                         <h3 class="text-3xl mb-4 text-indigo-600">Uma Abordagem Evolutiva</h3>
+                         <ul class="space-y-3 list-disc text-lg pl-5">
                              <li><strong>Adoção Opt-In:</strong> Sem migração forçada.</li>
                              <li><strong>Rollout em Fases:</strong> Começar com novas features.</li>
                              <li><strong>Interoperabilidade:</strong> O novo e o antigo coexistem.</li>
@@ -364,7 +377,7 @@ fun MyScreen(viewModel: MyViewModel) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-markup.min.js"></script>
 
     <script>
-        // JavaScript for slide navigation
+        // JavaScript para a navegação dos slides
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelectorAll('.slide');
             const prevButton = document.getElementById('prev-button');
