@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Evolution of RIBs: A Modernization Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Subtle Harmony -->
+    <!-- Application Structure Plan: A single-page, scrolling narrative structure is used to guide the user chronologically through the evolution of Uber's RIBs architecture. A fixed sidebar navigation allows for both guided storytelling and direct access to key stages ("The Problem," "Enter Compose," "The Evolution," "Key Wins"). This structure was chosen because the source material describes a process of change over time, which is best understood as a story. The interactive, side-by-side comparisons and tabbed sections make abstract architectural changes concrete and digestible. The flow is designed to build understanding step-by-step, starting with the baseline, identifying problems, presenting the solution, and finally summarizing the impact. -->
+    <!-- Visualization & Content Choices: The application uses a combination of interactive text blocks, diagrams built with HTML/Tailwind, and a Chart.js bar chart to present the information.
+- Problem/Solution sections use interactive toggles and side-by-side code snippets (HTML styled to look like code) to compare "before" and "after" states. Goal: Compare. Method: Interactive text/code blocks. Interaction: Click to reveal. Justification: This directly illustrates the benefits of the new architecture.
+- The architectural evolution is shown using tabs and updating diagrams (HTML/Tailwind). Goal: Show Change. Method: Tabbed content with diagrams. Interaction: Click tabs to switch views. Justification: Clearly separates the distinct stages of the implementation process.
+- The summary of benefits is a horizontal bar chart. Goal: Inform/Summarize. Method: Chart.js Bar Chart on Canvas. Interaction: Hover for tooltips. Justification: Provides a quick, visually engaging summary of the project's positive outcomes.
+All interactive elements are powered by vanilla JavaScript for state management and DOM manipulation. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4;
+            color: #27272A;
+        }
+        .section-active {
+            color: #2563EB;
+            font-weight: 600;
+            background-color: #E0E7FF;
+        }
+        .code-block {
+            background-color: #27272A;
+            color: #F8F8F2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+<div class="relative min-h-screen md:flex">
+
+    <aside class="fixed top-0 left-0 w-full md:w-64 bg-stone-100 h-16 md:h-screen z-20 border-b md:border-b-0 md:border-r border-stone-200">
+        <div class="flex items-center justify-between h-full px-6 md:px-0 md:pt-8 md:flex-col md:justify-start">
+            <h1 class="text-xl font-bold text-blue-600">RIBs Evolution</h1>
+            <nav id="nav-menu" class="hidden md:block mt-8 w-full">
+                <ul class="space-y-2 px-4">
+                    <li><a href="#intro" class="nav-link block p-3 rounded-lg text-stone-700 hover:bg-stone-200 transition-colors">Introduction</a></li>
+                    <li><a href="#problem" class="nav-link block p-3 rounded-lg text-stone-700 hover:bg-stone-200 transition-colors">The Old Way</a></li>
+                    <li><a href="#solution" class="nav-link block p-3 rounded-lg text-stone-700 hover:bg-stone-200 transition-colors">Enter Compose</a></li>
+                    <li><a href="#evolution" class="nav-link block p-3 rounded-lg text-stone-700 hover:bg-stone-200 transition-colors">The Evolution</a></li>
+                    <li><a href="#wins" class="nav-link block p-3 rounded-lg text-stone-700 hover:bg-stone-200 transition-colors">Key Wins</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    
+    <main class="md:ml-64 mt-16 md:mt-0 p-6 md:p-12 w-full">
+        <section id="intro" class="min-h-screen/2 py-20">
+            <h2 class="text-4xl font-bold tracking-tight text-stone-800">The Evolution of RIBs</h2>
+            <p class="mt-4 text-lg text-stone-600 max-w-3xl">This is the story of how Uber's Android architecture, RIBs, was modernized to embrace the future of mobile development. We'll explore the journey from a traditional, imperative UI system to a modern, declarative paradigm with Jetpack Compose. This application allows you to interactively explore the problems we faced, the solutions we implemented, and the evolution of our thinking that led to a more robust, scalable, and developer-friendly architecture.</p>
+        </section>
+
+        <section id="problem" class="py-20">
+            <h2 class="text-3xl font-bold text-stone-800">The Old Way: Pain Points of XML Views</h2>
+            <p class="mt-3 text-lg text-stone-600 max-w-3xl mb-8">Before Jetpack Compose, RIBs relied on Android's traditional XML View system. While powerful, this approach presented several challenges that impacted developer velocity and code quality. This section breaks down the key problems. Click on a pain point to see an explanation and a simplified example of the issue.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <button class="pain-point-btn p-4 bg-white border-2 border-stone-200 rounded-lg shadow-sm text-left hover:border-amber-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-300 transition-all">
+                    <h3 class="font-semibold text-stone-800">State Management Bugs</h3>
+                    <p class="text-sm text-stone-500 mt-1">Imperative calls led to inconsistent UI states.</p>
+                </button>
+                <button class="pain-point-btn p-4 bg-white border-2 border-stone-200 rounded-lg shadow-sm text-left hover:border-amber-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-300 transition-all">
+                    <h3 class="font-semibold text-stone-800">Two-File System</h3>
+                    <p class="text-sm text-stone-500 mt-1">Logic and layout lived in separate files.</p>
+                </button>
+                <button class="pain-point-btn p-4 bg-white border-2 border-stone-200 rounded-lg shadow-sm text-left hover:border-amber-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-300 transition-all">
+                    <h3 class="font-semibold text-stone-800">Styling Complexity</h3>
+                    <p class="text-sm text-stone-500 mt-1">Overlapping themes made debugging styles hard.</p>
+                </button>
+                <button class="pain-point-btn p-4 bg-white border-2 border-stone-200 rounded-lg shadow-sm text-left hover:border-amber-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-300 transition-all">
+                    <h3 class="font-semibold text-stone-800">Testing Difficulty</h3>
+                    <p class="text-sm text-stone-500 mt-1">Robust and reliable UI testing was a challenge.</p>
+                </button>
+            </div>
+
+            <div id="pain-point-details" class="bg-white p-6 rounded-lg shadow-lg transition-opacity duration-300 opacity-0 min-h-[20rem]">
+            </div>
+        </section>
+
+        <section id="solution" class="py-20">
+            <h2 class="text-3xl font-bold text-stone-800">The Solution: A Declarative Revolution with Compose</h2>
+            <p class="mt-3 text-lg text-stone-600 max-w-3xl mb-8">Jetpack Compose fundamentally changed how we build UI. It shifts from an imperative ("how to do it") to a declarative ("what it should look like") model. This section directly compares the two paradigms. The UI becomes a direct function of state, which simplifies code and eliminates entire classes of bugs.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-red-600">Imperative (The Old Way)</h3>
+                    <div id="imperative-code" class="code-block h-full"></div>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-semibold mb-2 text-green-600">Declarative (The New Way)</h3>
+                    <div id="declarative-code" class="code-block h-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="evolution" class="py-20">
+            <h2 class="text-3xl font-bold text-stone-800">The Evolution of Integration</h2>
+            <p class="mt-3 text-lg text-stone-600 max-w-3xl mb-8">Adopting Compose wasn't a single event but an evolution. Our approach matured as we gained experience, moving towards a purer separation of concerns. This section shows the two major stages of our integration journey. Click the tabs to see how the architecture changed from its initial implementation to its current, more refined state.</p>
+            
+            <div class="mb-4 border-b border-stone-200">
+                <nav class="flex space-x-4" aria-label="Tabs">
+                    <button id="tab-step1" class="tab-btn whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-lg border-blue-500 text-blue-600">
+                        Step 1: The ComposePresenter
+                    </button>
+                    <button id="tab-step2" class="tab-btn whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-lg border-transparent text-stone-500 hover:text-stone-700 hover:border-stone-300">
+                        Step 2: The Presenterless Future
+                    </button>
+                </nav>
+            </div>
+
+            <div id="evolution-content" class="mt-8">
+            </div>
+        </section>
+
+        <section id="wins" class="py-20">
+            <h2 class="text-3xl font-bold text-stone-800">Key Wins & Benefits</h2>
+            <p class="mt-3 text-lg text-stone-600 max-w-3xl mb-8">This modernization effort resulted in significant improvements across the board. The following chart summarizes the positive impact on key areas of our development process. Hover over each bar to see a brief explanation of the improvement.</p>
+            <div class="bg-white p-4 md:p-8 rounded-lg shadow-lg">
+                <div class="chart-container">
+                    <canvas id="winsChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const painPointsData = {
+        "State Management Bugs": {
+            description: "In an imperative system, multiple parts of the code can try to update a single view. This often leads to race conditions or inconsistent states where the UI doesn't reflect the true state of the data. Forgetting to update one part of the UI can lead to subtle, hard-to-find bugs.",
+            code: `// Logic is scattered, making it fragile
+if (user.isLoggedIn) {
+  profileIcon.setVisibility(View.VISIBLE);
+  welcomeMessage.setText("Welcome, " + user.name);
+} else {
+  profileIcon.setVisibility(View.GONE);
+  welcomeMessage.setText("Please log in");
+}
+// What if another function also changes the welcomeMessage?`
+        },
+        "Two-File System": {
+            description: "Development required constant context switching between a Kotlin/Java file for logic and an XML file for layout. This separation made it harder to understand the relationship between a view's appearance and its behavior, slowing down development and refactoring.",
+            code: `// MyInteractor.kt
+presenter.showTitle("My Awesome Title")
+
+// layout.xml
+<TextView
+  android:id="@+id/title_text"
+  android:layout_width="wrap_content"
+  ... />`
+        },
+        "Styling Complexity": {
+            description: "Debugging UI appearance was difficult due to multiple layers of styling (themes, styles, direct attributes) being applied at different stages. It was often unclear why a view had a specific color or font, leading to wasted time on visual debugging.",
+            code: `<!-- Is the color from the theme, the style, or set in code? -->
+<Button
+    style="@style/MyCustomButton"
+    android:theme="@style/MySpecialTheme"
+    android:background="@color/some_color"
+    ... />`
+        },
+        "Testing Difficulty": {
+            description: "UI tests were often brittle and slow. They required running on an emulator or device and relied on unstable identifiers (like view IDs) that could break during refactoring. Verifying the state of a complex UI required many individual assertions.",
+            code: `// Espresso Test
+onView(withId(R.id.title_text))
+  .check(matches(withText("My Awesome Title")));
+
+onView(withId(R.id.profile_icon))
+  .check(matches(isDisplayed()));`
+        }
+    };
+    
+    const codeComparisonData = {
+        imperative: `// Imperative: Manually finding and updating a view
+val myTextView = findViewById(R.id.my_text_view)
+myTextView.text = "New data loaded!"
+myTextView.setTextColor(Color.GREEN)
+if (show) {
+    myTextView.visibility = View.VISIBLE
+} else {
+    myTextView.visibility = View.GONE
+}`,
+        declarative: `// Declarative: Describing the UI based on state
+@Composable
+fun MyComponent(text: String, color: Color, show: Boolean) {
+    if (show) {
+        Text(
+            text = text,
+            color = color
+        )
+    }
+}`
+    };
+
+    const evolutionData = {
+        step1: `
+            <p class="text-stone-600 mb-6">The initial approach introduced a <strong>ComposePresenter</strong> to act as a bridge. The Interactor remained the home for business logic, but instead of making direct view calls, it would update a state stream. The Presenter's job was to subscribe to this state and pass it to the Composable UI. This decoupled the Interactor from the concrete UI implementation but still required a Presenter layer.</p>
+            <div class="bg-stone-50 p-6 rounded-lg border border-stone-200">
+                <h4 class="font-semibold text-center mb-4">Architectural Flow: Stage 1</h4>
+                <div class="flex justify-around items-center text-center">
+                    <div class="p-4 bg-red-100 rounded-lg shadow-sm"><p class="font-medium text-red-700">Interactor</p><p class="text-sm text-red-600">(Business Logic)</p></div>
+                    <div class="text-2xl text-stone-300 font-mono">→</div>
+                    <div class="p-4 bg-yellow-100 rounded-lg shadow-sm"><p class="font-medium text-yellow-700">ComposePresenter</p><p class="text-sm text-yellow-600">(The Bridge)</p></div>
+                    <div class="text-2xl text-stone-300 font-mono">→</div>
+                    <div class="p-4 bg-blue-100 rounded-lg shadow-sm"><p class="font-medium text-blue-700">Composable</p><p class="text-sm text-blue-600">(The UI)</p></div>
+                </div>
+            </div>`,
+        step2: `
+            <p class="text-stone-600 mb-6">The architecture evolved to remove the Presenter entirely for most cases. The <strong>Presenterless Interactor</strong> now owns and exposes its state stream directly. The UI (Composable) subscribes to this stream. This creates a pure, UI-agnostic business logic layer that aligns perfectly with MVI patterns, reduces boilerplate, and simplifies testing.</p>
+            <div class="bg-stone-50 p-6 rounded-lg border border-stone-200">
+                <h4 class="font-semibold text-center mb-4">Architectural Flow: Stage 2</h4>
+                <div class="flex justify-around items-center text-center">
+                    <div class="p-4 bg-red-100 rounded-lg shadow-sm"><p class="font-medium text-red-700">Interactor</p><p class="text-sm text-red-600">(Business Logic & State)</p></div>
+                    <div class="text-2xl text-stone-300 font-mono">→</div>
+                    <div class="p-4 bg-blue-100 rounded-lg shadow-sm"><p class="font-medium text-blue-700">Composable</p><p class="text-sm text-blue-600">(The UI)</p></div>
+                </div>
+            </div>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="font-semibold mb-2 text-stone-700">Interactor with Presenter</h4>
+                  <div class="code-block h-full">class MyInteractor(
+  presenter: MyPresenter, ...
+) {
+  // Interactor is aware of the presenter
+  presenter.composePresenter
+    .updateState { it.copy(...) }
+}</div>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-2 text-stone-700">Presenterless Interactor</h4>
+                  <div class="code-block h-full">class MyInteractor(...) :
+  PresenterlessInteractor<MyState, ...> 
+{
+  // No presenter reference!
+  // Pure business logic
+  setState { copy(...) }
+}</div>
+                </div>
+            </div>`
+    };
+
+    const painPointBtns = document.querySelectorAll('.pain-point-btn');
+    const painPointDetails = document.getElementById('pain-point-details');
+    let activePainPointBtn = null;
+
+    painPointBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const painPoint = btn.querySelector('h3').textContent;
+            const data = painPointsData[painPoint];
+
+            if (activePainPointBtn === btn) {
+                painPointDetails.innerHTML = '';
+                painPointDetails.classList.add('opacity-0');
+                btn.classList.remove('bg-amber-100', 'border-amber-400');
+                activePainPointBtn = null;
+                return;
+            }
+
+            if (activePainPointBtn) {
+                activePainPointBtn.classList.remove('bg-amber-100', 'border-amber-400');
+            }
+            
+            painPointDetails.innerHTML = `
+                <h4 class="font-semibold text-lg text-stone-800 mb-2">${painPoint}</h4>
+                <p class="text-stone-600 mb-4">${data.description}</p>
+                <div class="code-block">${data.code}</div>`;
+            painPointDetails.classList.remove('opacity-0');
+            
+            btn.classList.add('bg-amber-100', 'border-amber-400');
+            activePainPointBtn = btn;
+        });
+    });
+
+    document.getElementById('imperative-code').textContent = codeComparisonData.imperative;
+    document.getElementById('declarative-code').textContent = codeComparisonData.declarative;
+
+    const tabStep1 = document.getElementById('tab-step1');
+    const tabStep2 = document.getElementById('tab-step2');
+    const evolutionContent = document.getElementById('evolution-content');
+
+    function showEvolutionStep(step) {
+        evolutionContent.innerHTML = evolutionData[step];
+        if (step === 'step1') {
+            tabStep1.classList.add('border-blue-500', 'text-blue-600');
+            tabStep1.classList.remove('border-transparent', 'text-stone-500', 'hover:text-stone-700', 'hover:border-stone-300');
+            tabStep2.classList.add('border-transparent', 'text-stone-500', 'hover:text-stone-700', 'hover:border-stone-300');
+            tabStep2.classList.remove('border-blue-500', 'text-blue-600');
+        } else {
+            tabStep2.classList.add('border-blue-500', 'text-blue-600');
+            tabStep2.classList.remove('border-transparent', 'text-stone-500', 'hover:text-stone-700', 'hover:border-stone-300');
+            tabStep1.classList.add('border-transparent', 'text-stone-500', 'hover:text-stone-700', 'hover:border-stone-300');
+            tabStep1.classList.remove('border-blue-500', 'text-blue-600');
+        }
+    }
+
+    tabStep1.addEventListener('click', () => showEvolutionStep('step1'));
+    tabStep2.addEventListener('click', () => showEvolutionStep('step2'));
+    
+    showEvolutionStep('step1');
+
+    const winsChartCtx = document.getElementById('winsChart').getContext('2d');
+    new Chart(winsChartCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Developer Experience', 'Reliability', 'Testability', 'Performance'],
+            datasets: [{
+                label: 'Degree of Improvement',
+                data: [9, 8, 8.5, 7],
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.7)',
+                    'rgba(16, 185, 129, 0.7)',
+                    'rgba(245, 158, 11, 0.7)',
+                    'rgba(239, 68, 68, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(16, 185, 129, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(239, 68, 68, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 10,
+                    grid: {
+                        color: '#E5E7EB'
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(context) {
+                            const tooltips = {
+                                'Developer Experience': 'Simpler, declarative APIs and less boilerplate led to faster, more enjoyable development.',
+                                'Reliability': 'Declarative UI and state-driven logic eliminated entire classes of state management bugs.',
+                                'Testability': 'Pure business logic in Presenterless Interactors is easy to unit test without UI frameworks.',
+                                'Performance': 'Compose is more efficient, reducing object allocations and improving rendering performance.'
+                            };
+                            return tooltips[context.label] || '';
+                        }
+                    },
+                    backgroundColor: '#1F2937',
+                    titleFont: { size: 0 },
+                    bodyFont: { size: 14 },
+                    padding: 12,
+                    displayColors: false
+                }
+            }
+        }
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.toggle('section-active', link.getAttribute('href').substring(1) === entry.target.id);
+                });
+            }
+        });
+    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
+</body>
+</html>
